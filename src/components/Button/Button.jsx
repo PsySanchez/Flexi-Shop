@@ -1,13 +1,8 @@
-import classes from "./Button.module.css";
-
 function Button({ children, isActive, ...props }) {
+  const { className } = props;
+
   return (
-    <button
-      {...props}
-      className={
-        isActive ? `${classes.button} ${classes.active}` : classes.button
-      }
-    >
+    <button type="button" {...props} className={`btn ${className}`}>
       {children}
     </button>
   );

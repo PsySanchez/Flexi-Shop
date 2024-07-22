@@ -1,0 +1,16 @@
+main {
+  position: fixed;
+  left: 0;
+  top: 60px;
+}
+
+.router {
+  position: fixed;
+  left: 150px;
+  display: flex;
+  justify-content: center;
+
+  overflow-y: auto;
+  height: 100%;
+  width: 100%;
+}

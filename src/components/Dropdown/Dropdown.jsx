@@ -1,8 +1,5 @@
-import { useNavebar } from "../Navbar/NavbarContext";
-
+import { NavLink } from "react-router-dom";
 export default function Dropdown() {
-  const { onClick } = useNavebar();
-
   return (
     <div className="dropdown">
       <a
@@ -17,19 +14,19 @@ export default function Dropdown() {
 
       <ul className="dropdown-menu">
         <li>
-          <a className="dropdown-item" href="about" onClick={() => onClick}>
+          <NavLink to="/about" className="dropdown-item">
             About
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a className="dropdown-item" href="#" onClick={() => onClick}>
+          <NavLink className="dropdown-item" to="/">
             Another action
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a className="dropdown-item" href="#" onClick={() => onClick}>
+          <NavLink className="dropdown-item" to="/">
             Something else here
-          </a>
+          </NavLink>
         </li>
       </ul>
     </div>
