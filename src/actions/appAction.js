@@ -3,6 +3,8 @@ import {
   HIDE_ALERT,
   SHOW_LOADER,
   HIDE_LOADER,
+  SHOW_MODAL,
+  HIDE_MODAL,
 } from "../types/reduxTypes";
 
 import { PRIMARY } from "../types/alertTypes";
@@ -36,5 +38,20 @@ export function showLoader() {
 export function hideLoader() {
   return {
     type: HIDE_LOADER,
+    payload: false,
+  };
+}
+
+export function showModal(props) {
+  return {
+    type: SHOW_MODAL,
+    payload: { ...props },
+  };
+}
+
+export function hideModal() {
+  return {
+    type: HIDE_MODAL,
+    payload: { text: null, modalType: null },
   };
 }

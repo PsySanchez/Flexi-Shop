@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { PRIMARY } from "../../types/buttonTypes";
 import { login } from "../../actions/authAction";
+import { showModal } from "../../actions/appAction";
 
 export default function Login() {
   // username: "mor_2314",
@@ -20,7 +21,15 @@ export default function Login() {
 
     const { userName, password } = form;
 
-    dispatch(login(userName, password));
+    // dispatch(login(userName, password));
+    dispatch(
+      showModal({
+        title: "Login",
+        text: "You are logged in",
+        btnSuccess: "Ok",
+        btnCancel: "Cancel",
+      })
+    );
   };
 
   const changeInputHandler = (event) => {
