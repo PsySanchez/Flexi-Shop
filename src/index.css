@@ -85,3 +85,11 @@ html {
   gap: 1rem;
   align-items: baseline;
 }
+
+.loader-wrapper {
+  position: fixed;
+  top: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

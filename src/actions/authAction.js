@@ -61,9 +61,24 @@ export function register(user, password) {
 }
 
 export function setUser(token) {
+  // save token to local storage
+  localStorage.setItem("token", token);
+
   const { user } = jwtDecode(token);
   return {
     type: SET_USER,
     payload: { user, token },
+  };
+}
+
+export function checkAuth() {
+  return (dispatch) => {
+    const token = localStorage.getItem("token");
+    console.log("🚀 ~ return ~ token:", token)
+
+    if (token) {
+      const { user } = jwtDecode(token);
+      dispatch(setUser(token));
+    }
   };
 }

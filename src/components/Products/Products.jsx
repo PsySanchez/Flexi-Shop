@@ -1,13 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchProducts } from "../../actions/productAction";
+import { showLoader } from "../../actions/appAction";
+
 import "./Products.css";
 
 export default function Products() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
+
   useEffect(() => {
     if (products.length === 0) {
+      dispatch(showLoader());
+
       dispatch(fetchProducts());
     }
   }, [dispatch, products.length]);

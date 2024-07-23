@@ -12,5 +12,5 @@ main {
 
   overflow-y: auto;
   height: 100%;
-  width: 100%;
+  width: calc(100% - 150px);
 }

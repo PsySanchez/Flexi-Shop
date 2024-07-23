@@ -6,6 +6,7 @@ export const LOGIN = "AUTH/LOGIN";
 export const LOGOUT = "AUTH/LOGOUT";
 export const REGISTER = "AUTH/REGISTER";
 export const SET_USER = "AUTH/SET_USER";
+export const CHECK_AUTH = "AUTH/CHECK_AUTH";
 // app
 export const SHOW_MODAL = "APP/SHOW_MODAL";
 export const HIDE_MODAL = "APP/HIDE_MODAL";
