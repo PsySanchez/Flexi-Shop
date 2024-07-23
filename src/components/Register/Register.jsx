@@ -1,36 +1,24 @@
-import Button from "../Button/Button";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { register } from "../../actions/authAction";
+import Button from "../Button/Button";
 import { PRIMARY } from "../../types/buttonTypes";
-import { login } from "../../actions/authAction";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
-export default function Login() {
-  const user = useSelector((state) => state.auth.user);
-  // username: "mor_2314",
-  // password: "83r5^_",
+export default function Register() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     userName: "",
     password: "",
+    email: "",
+    checkbox: false,
     hasError: true,
   });
-
-  useEffect(() => {
-    if (user) {
-      navigate("/");
-    }
-  }, [user]);
 
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const { userName, password } = form;
-
-    dispatch(login(userName, password));
+    dispatch(register(form));
   };
 
   const changeInputHandler = (event) => {
@@ -56,7 +44,7 @@ export default function Login() {
     <form onSubmit={submitHandler} className="form">
       <div className="mb-3">
         <label htmlFor="userName" className="form-label">
-          Login
+          User name
         </label>
         <input
           type="text"
@@ -81,6 +69,37 @@ export default function Login() {
           placeholder="Enter your password"
           onChange={changeInputHandler}
         />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="email" className="form-label">
+          Email
+        </label>
+        <input
+          type="text"
+          className="form-control"
+          id="email"
+          value={form.email}
+          name="email"
+          placeholder="Enter your email"
+          onChange={changeInputHandler}
+        />
+      </div>
+      <div className="mb-3 checkbox-wrapper">
+        <input
+          className="form-check-input mt-0"
+          id="email"
+          type="checkbox"
+          value={form.checkbox}
+          name="checkbox"
+          aria-label="approve privacy policy"
+          onChange={changeInputHandler}
+        />
+        <label htmlFor="email" className="form-label">
+          Approve&nbsp;
+          <a href="https://www.w3schools.com" target="_blank">
+            privacy policy
+          </a>
+        </label>
       </div>
       <Button
         className={PRIMARY}

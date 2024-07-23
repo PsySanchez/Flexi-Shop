@@ -2,14 +2,23 @@ import Search from "../Search/Search";
 import Dropdown from "../Dropdown/Dropdown";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../actions/authAction";
+import { showModal } from "../../actions/appAction";
 
 export default function Navbar() {
   const dispatch = useDispatch();
-  const logoutHandler = () => {
-    dispatch(logout());
-  };
+
   const user = useSelector((state) => state.auth.user);
+
+  const logoutHandler = () => {
+    dispatch(
+      showModal({
+        title: "Logout",
+        text: "Are you sure you want to logout?",
+        btnSuccess: "Logout",
+        btnCancel: "Cancel",
+      })
+    );
+  };
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -69,7 +78,7 @@ export default function Navbar() {
             {!user && (
               <li className="nav-item">
                 <NavLink
-                  to="/signUp"
+                  to="/register"
                   className="nav-link"
                   style={({ isActive }) => ({
                     color: isActive ? "#0d6efd" : "black",

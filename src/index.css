@@ -79,3 +79,9 @@ html {
   padding: 2rem;
   margin-top: 5rem;
 }
+
+.checkbox-wrapper {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+}
