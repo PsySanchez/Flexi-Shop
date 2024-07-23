@@ -106,9 +106,7 @@ export default function Navbar() {
               <li className="nav-item">
                 <NavLink
                   className="nav-link"
-                  style={({ isActive }) => ({
-                    color: isActive ? "#0d6efd" : "black",
-                  })}
+                  style={{ color: "#0d6efd" }}
                   onClick={logoutHandler}
                 >
                   Logout

@@ -1,5 +1,5 @@
 import { jwtDecode } from "jwt-decode";
-import { showAlert } from "./appAction";
+import { hideLoader, showAlert } from "./appAction";
 import { SUCCESS, ERROR } from "../types/alertTypes";
 import { SET_USER, LOGOUT, REGISTER } from "../types/reduxTypes";
 
@@ -16,6 +16,8 @@ export function login(username, password) {
           password,
         }),
       });
+
+      dispatch(hideLoader());
 
       if (!res.ok) {
         switch (res.status) {
@@ -48,6 +50,9 @@ export function login(username, password) {
 }
 
 export function logout() {
+  // remove token from local storage
+  localStorage.removeItem("token");
+
   return {
     type: LOGOUT,
   };
@@ -67,17 +72,15 @@ export function setUser(token) {
   const { user } = jwtDecode(token);
   return {
     type: SET_USER,
-    payload: { user, token },
+    payload: { name: user, token },
   };
 }
 
 export function checkAuth() {
   return (dispatch) => {
     const token = localStorage.getItem("token");
-    console.log("🚀 ~ return ~ token:", token)
 
     if (token) {
-      const { user } = jwtDecode(token);
       dispatch(setUser(token));
     }
   };

@@ -32,6 +32,7 @@ export function hideAlert() {
 export function showLoader() {
   return {
     type: SHOW_LOADER,
+    payload: true,
   };
 }
 

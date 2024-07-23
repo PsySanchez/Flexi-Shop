@@ -5,9 +5,11 @@ import { PRIMARY } from "../../types/buttonTypes";
 import { login } from "../../actions/authAction";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { showLoader } from "../../actions/appAction";
 
 export default function Login() {
   const user = useSelector((state) => state.auth.user);
+  const loading = useSelector((state) => state.app.loading);
   // username: "mor_2314",
   // password: "83r5^_",
   const dispatch = useDispatch();
@@ -29,7 +31,7 @@ export default function Login() {
     event.preventDefault();
 
     const { userName, password } = form;
-
+    dispatch(showLoader());
     dispatch(login(userName, password));
   };
 
@@ -84,7 +86,7 @@ export default function Login() {
       </div>
       <Button
         className={PRIMARY}
-        disabled={form.hasError}
+        disabled={loading || form.hasError}
         isActive={!form.hasError}
         onClick={submitHandler}
       >
