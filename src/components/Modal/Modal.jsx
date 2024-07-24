@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import { logout } from "../../actions/authAction";
 import { showModal } from "../../actions/appAction";
 import { useDispatch } from "react-redux";
-import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 
 export default function Modal() {
@@ -53,21 +52,21 @@ export default function Modal() {
             <p>{text}</p>
           </div>
           <div className="modal-footer">
-            <Button
+            <button
               type="button"
               className="btn btn-secondary"
               data-bs-dismiss="modal"
               onClick={handleCancel}
             >
               {btnCancel}
-            </Button>
-            <Button
+            </button>
+            <button
               type="button"
               className="btn btn-primary"
               onClick={handleSuccess}
             >
               {btnSuccess}
-            </Button>
+            </button>
           </div>
         </div>
       </div>

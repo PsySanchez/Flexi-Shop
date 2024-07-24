@@ -1,5 +1,32 @@
-import { UPDATE_PRODUCTS } from "../types/reduxTypes";
-import { hideLoader } from "./appAction";
+import {
+  ADD_PRODUCT,
+  UPDATE_PRODUCTS,
+  DELETE_PRODUCT,
+  ADD_CATEGORY,
+  REQUEST_PRODUCTS,
+  REQUEST_CATEGORIES,
+} from "../types/reduxTypes";
+
+export function addProduct(product) {
+  return {
+    type: ADD_PRODUCT,
+    payload: product,
+  };
+}
+
+export function addCategory(category) {
+  return {
+    type: ADD_CATEGORY,
+    payload: category,
+  };
+}
+
+export function deleteProduct(id) {
+  return {
+    type: DELETE_PRODUCT,
+    payload: id,
+  };
+}
 
 export function updateProducts(products) {
   return {
@@ -9,14 +36,13 @@ export function updateProducts(products) {
 }
 
 export function fetchProducts() {
-  try {
-    return async (dispatch) => {
-      const res = await fetch("https://fakestoreapi.com/products");
-      const products = await res.json();
-      dispatch(hideLoader());
-      dispatch(updateProducts(products));
-    };
-  } catch (error) {
-    console.error(error);
-  }
+  return {
+    type: REQUEST_PRODUCTS,
+  };
+}
+
+export function fetchCategories() {
+  return {
+    type: REQUEST_CATEGORIES,
+  };
 }

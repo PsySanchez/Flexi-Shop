@@ -9,7 +9,7 @@ export default function Profile() {
 
   return (
     <div>
-      <h1>Profile</h1>
+      <h2>Profile</h2>
       <p>{user?.name}</p>
     </div>
   );

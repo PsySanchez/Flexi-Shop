@@ -1,7 +1,7 @@
 import { jwtDecode } from "jwt-decode";
 import { hideLoader, showAlert } from "./appAction";
 import { SUCCESS, ERROR } from "../types/alertTypes";
-import { SET_USER, LOGOUT, REGISTER } from "../types/reduxTypes";
+import { SET_USER, LOGOUT, REGISTER, IS_LOADING } from "../types/reduxTypes";
 
 export function login(username, password) {
   try {
@@ -83,5 +83,13 @@ export function checkAuth() {
     if (token) {
       dispatch(setUser(token));
     }
+    dispatch(isLoading(false));
+  };
+}
+
+export function isLoading(loading) {
+  return {
+    type: IS_LOADING,
+    payload: loading,
   };
 }

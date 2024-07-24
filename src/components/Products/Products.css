@@ -4,3 +4,25 @@
   gap: 1rem;
   padding: 1rem;
 }
+
+.products-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* Adjust the number of lines as needed */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

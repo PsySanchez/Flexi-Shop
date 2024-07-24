@@ -1,6 +1,17 @@
-import { LOGIN, REGISTER, LOGOUT, SET_USER } from "../types/reduxTypes";
+import {
+  LOGIN,
+  REGISTER,
+  LOGOUT,
+  SET_USER,
+  IS_LOADING,
+} from "../types/reduxTypes";
 
-export const authReducer = (state = { user: null }, action) => {
+const initialState = {
+  user: null,
+  isLoading: true,
+};
+
+export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN:
     case REGISTER:
@@ -17,6 +28,11 @@ export const authReducer = (state = { user: null }, action) => {
       return {
         ...state,
         user: action.payload,
+      };
+    case IS_LOADING:
+      return {
+        ...state,
+        isLoading: action.payload,
       };
 
     default:

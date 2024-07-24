@@ -1,14 +1,12 @@
-import Button from "../Button/Button";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { PRIMARY } from "../../types/buttonTypes";
 import { login } from "../../actions/authAction";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { showLoader } from "../../actions/appAction";
 
 export default function Login() {
-  const user = useSelector((state) => state.auth.user);
+  // const user = useSelector((state) => state.auth.user);
   const loading = useSelector((state) => state.app.loading);
   // username: "mor_2314",
   // password: "83r5^_",
@@ -21,11 +19,11 @@ export default function Login() {
     hasError: true,
   });
 
-  useEffect(() => {
-    if (user) {
-      navigate("/");
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     navigate("/");
+  //   }
+  // }, [user]);
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -37,16 +35,7 @@ export default function Login() {
 
   const changeInputHandler = (event) => {
     const { name, value } = event.target;
-    switch (name) {
-      case "userName":
-        setForm((prev) => ({ ...prev, userName: value }));
-        break;
-      case "password":
-        setForm((prev) => ({ ...prev, password: value }));
-        break;
-      default:
-        break;
-    }
+    setForm((prev) => ({ ...prev, [name]: value }));
 
     setForm((prev) => ({
       ...prev,
@@ -56,7 +45,7 @@ export default function Login() {
 
   return (
     <form onSubmit={submitHandler} className="form">
-      <div className="mb-3">
+      <div className="col-md-10">
         <label htmlFor="userName" className="form-label">
           Login
         </label>
@@ -70,7 +59,7 @@ export default function Login() {
           onChange={changeInputHandler}
         />
       </div>
-      <div className="mb-3">
+      <div className="col-md-10">
         <label htmlFor="password" className="form-label">
           Password
         </label>
@@ -84,14 +73,13 @@ export default function Login() {
           onChange={changeInputHandler}
         />
       </div>
-      <Button
-        className={PRIMARY}
+      <button
+        className="btn btn-primary"
         disabled={loading || form.hasError}
-        isActive={!form.hasError}
         onClick={submitHandler}
       >
         Login
-      </Button>
+      </button>
     </form>
   );
 }

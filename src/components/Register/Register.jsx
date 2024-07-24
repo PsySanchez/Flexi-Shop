@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { register } from "../../actions/authAction";
-import Button from "../Button/Button";
-import { PRIMARY } from "../../types/buttonTypes";
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -42,7 +40,7 @@ export default function Register() {
 
   return (
     <form onSubmit={submitHandler} className="form">
-      <div className="mb-3">
+      <div className="col-md-10">
         <label htmlFor="userName" className="form-label">
           User name
         </label>
@@ -56,7 +54,7 @@ export default function Register() {
           onChange={changeInputHandler}
         />
       </div>
-      <div className="mb-3">
+      <div className="col-md-10">
         <label htmlFor="password" className="form-label">
           Password
         </label>
@@ -70,7 +68,7 @@ export default function Register() {
           onChange={changeInputHandler}
         />
       </div>
-      <div className="mb-3">
+      <div className="col-md-10">
         <label htmlFor="email" className="form-label">
           Email
         </label>
@@ -84,7 +82,7 @@ export default function Register() {
           onChange={changeInputHandler}
         />
       </div>
-      <div className="mb-3 checkbox-wrapper">
+      <div className="col-md-10 checkbox-wrapper">
         <input
           className="form-check-input mt-0"
           id="email"
@@ -101,14 +99,13 @@ export default function Register() {
           </a>
         </label>
       </div>
-      <Button
-        className={PRIMARY}
+      <button
+        className="btn btn-primary"
         disabled={form.hasError}
-        isActive={!form.hasError}
         onClick={submitHandler}
       >
-        Login
-      </Button>
+        Register
+      </button>
     </form>
   );
 }

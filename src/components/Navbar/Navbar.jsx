@@ -1,24 +1,10 @@
 import Search from "../Search/Search";
 import Dropdown from "../Dropdown/Dropdown";
 import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { showModal } from "../../actions/appAction";
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
-  const dispatch = useDispatch();
-
   const user = useSelector((state) => state.auth.user);
-
-  const logoutHandler = () => {
-    dispatch(
-      showModal({
-        title: "Logout",
-        text: "Are you sure you want to logout?",
-        btnSuccess: "Logout",
-        btnCancel: "Cancel",
-      })
-    );
-  };
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -47,9 +33,6 @@ export default function Navbar() {
               >
                 Products
               </NavLink>
-            </li>
-            <li className="nav-item dropdown">
-              <Dropdown />
             </li>
             <li className="nav-item">
               <NavLink
@@ -89,28 +72,8 @@ export default function Navbar() {
               </li>
             )}
             {user && (
-              <li className="nav-item">
-                <NavLink
-                  to="/profile"
-                  className="nav-link"
-                  style={({ isActive }) => ({
-                    color: isActive ? "#0d6efd" : "black",
-                  })}
-                >
-                  Profile
-                </NavLink>
-              </li>
-            )}
-
-            {user && (
-              <li className="nav-item">
-                <NavLink
-                  className="nav-link"
-                  style={{ color: "#0d6efd" }}
-                  onClick={logoutHandler}
-                >
-                  Logout
-                </NavLink>
+              <li className="nav-item dropdown">
+                <Dropdown />
               </li>
             )}
           </ul>
