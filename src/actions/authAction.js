@@ -1,52 +1,17 @@
 import { jwtDecode } from "jwt-decode";
-import { hideLoader, showAlert } from "./appAction";
-import { SUCCESS, ERROR } from "../types/alertTypes";
-import { SET_USER, LOGOUT, REGISTER, IS_LOADING } from "../types/reduxTypes";
+import {
+  SET_USER,
+  LOGOUT,
+  REGISTER,
+  IS_LOADING,
+  REQUEST_LOGIN,
+} from "../types/reduxTypes";
 
 export function login(username, password) {
-  try {
-    return async (dispatch) => {
-      const res = await fetch("https://fakestoreapi.com/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          password,
-        }),
-      });
-
-      dispatch(hideLoader());
-
-      if (!res.ok) {
-        switch (res.status) {
-          case 404:
-            dispatch(showAlert("User not found", ERROR));
-            break;
-          case 401:
-            dispatch(showAlert("Invalid login or password", ERROR));
-            break;
-          default:
-            dispatch(showAlert("Server error", ERROR));
-            break;
-        }
-        return;
-      }
-
-      const data = await res.json();
-
-      if (data?.token) {
-        dispatch(showAlert("You are logged in", SUCCESS));
-        dispatch(setUser(data.token));
-      } else {
-        dispatch(showAlert("Invalid login or password", ERROR));
-        console.error(data);
-      }
-    };
-  } catch (error) {
-    console.error(error);
-  }
+  return {
+    type: REQUEST_LOGIN,
+    payload: { username, password },
+  };
 }
 
 export function logout() {
@@ -66,9 +31,6 @@ export function register(user, password) {
 }
 
 export function setUser(token) {
-  // save token to local storage
-  localStorage.setItem("token", token);
-
   const { user } = jwtDecode(token);
   return {
     type: SET_USER,

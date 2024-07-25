@@ -5,6 +5,7 @@ import {
   ADD_CATEGORY,
   REQUEST_PRODUCTS,
   REQUEST_CATEGORIES,
+  REQUEST_SELECTED_PRODUCT,
 } from "../types/reduxTypes";
 
 export function addProduct(product) {
@@ -38,6 +39,13 @@ export function updateProducts(products) {
 export function fetchProducts() {
   return {
     type: REQUEST_PRODUCTS,
+  };
+}
+
+export function fetchSelectedProduct(id) {
+  return {
+    type: REQUEST_SELECTED_PRODUCT,
+    payload: id,
   };
 }
 

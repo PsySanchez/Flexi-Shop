@@ -4,11 +4,13 @@ import {
   DELETE_PRODUCT,
   FETCH_PRODUCTS,
   FETCH_CATEGORIES,
+  FETCH_SELECTED_PRODUCT,
 } from "../types/reduxTypes";
 
 const initialState = {
   products: [],
   categories: [],
+  selectedProduct: {},
 };
 
 export const productsReducer = (state = initialState, action) => {
@@ -27,6 +29,11 @@ export const productsReducer = (state = initialState, action) => {
       return {
         ...state,
         products: action.payload,
+      };
+    case FETCH_SELECTED_PRODUCT:
+      return {
+        ...state,
+        selectedProduct: action.payload,
       };
     case DELETE_PRODUCT:
       return {
