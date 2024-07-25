@@ -1,10 +1,18 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCategories } from "../../actions/productAction";
+import { useNavigate } from "react-router-dom";
+import {
+  addProduct,
+  fetchCategories,
+} from "../../actions/productAction";
 
 export default function AddProduct() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.products.categories);
+  const selectedProduct = useSelector(
+    (state) => state.products.selectedProduct
+  );
 
   const [form, setForm] = useState({
     category: "",
@@ -18,6 +26,12 @@ export default function AddProduct() {
   useEffect(() => {
     if (!categories.length) dispatch(fetchCategories());
   }, [dispatch, categories]);
+
+  useEffect(() => {
+    if (!selectedProduct?.id) {
+      navigate(`/product/${selectedProduct.id}`);
+    }
+  }, [selectedProduct]);
 
   const changeInputHandler = (event) => {
     const { name, value } = event.target;
@@ -37,9 +51,14 @@ export default function AddProduct() {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const { userName, password } = form;
-    dispatch(showLoader());
-    dispatch(login(userName, password));
+    const product = { ...form };
+
+    dispatch(addProduct(product));
+    // title: 'test product',
+    // price: 13.5,
+    // description: 'lorem ipsum set',
+    // image: 'https://i.pravatar.cc',
+    // category: 'electronic'
   };
 
   return (

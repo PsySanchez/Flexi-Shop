@@ -48,7 +48,9 @@ export default function Products() {
           name="category"
           onChange={changeInputHandler}
         >
-          <option value="">Choose category</option>
+          <option value="" key={"chooseCategory"}>
+            Choose category
+          </option>
           {categories.map((category) => (
             <option key={category} value={category}>
               {category}

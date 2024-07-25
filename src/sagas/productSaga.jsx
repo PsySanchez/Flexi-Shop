@@ -40,7 +40,7 @@ async function fetchCategories() {
 export function* sagaWorkerFetchSelectedProduct(action) {
   try {
     yield put(showLoader());
-    const payload = yield call(fetchSingleProduct, action.payload);
+    const payload = yield call(fetchSelectedProduct, action.payload);
     yield put({ type: FETCH_SELECTED_PRODUCT, payload });
     yield put(hideLoader());
   } catch (e) {
@@ -49,7 +49,30 @@ export function* sagaWorkerFetchSelectedProduct(action) {
   }
 }
 
-async function fetchSingleProduct(id) {
+async function fetchSelectedProduct(id) {
   const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+  return await res.json();
+}
+
+export function* sagaWorkerAddProduct(action) {
+  try {
+    yield put(showLoader());
+    const payload = yield call(addProduct, action.payload);
+    yield put({ type: FETCH_SELECTED_PRODUCT, payload });
+    yield put(hideLoader());
+  } catch (e) {
+    yield put(showAlert("Something went wrong"));
+    yield put(hideLoader());
+  }
+}
+
+async function addProduct(product) {
+  const res = await fetch("https://fakestoreapi.com/products", {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify(product),
+  });
   return await res.json();
 }
