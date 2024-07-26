@@ -5,6 +5,8 @@ import {
   REQUEST_CATEGORIES,
   REQUEST_LOGIN,
   ADD_PRODUCT,
+  REQUEST_UPDATE_SINGLE_PRODUCT,
+  REQUEST_DELETE_PRODUCT,
 } from "../types/reduxTypes";
 
 import {
@@ -12,6 +14,8 @@ import {
   sagaWorkerFetchProducts,
   sagaWorkerFetchSelectedProduct,
   sagaWorkerAddProduct,
+  sagaWorkerUpdateSingleProduct,
+  sagaWorkerDeleteProduct,
 } from "./productSaga";
 
 import { sagaWorkerLogin } from "./authSaga";
@@ -22,4 +26,6 @@ export function* sagaWatcher() {
   yield takeEvery(REQUEST_CATEGORIES, sagaWorkerFetchCategories);
   yield takeEvery(ADD_PRODUCT, sagaWorkerAddProduct);
   yield takeEvery(REQUEST_LOGIN, sagaWorkerLogin);
+  yield takeEvery(REQUEST_UPDATE_SINGLE_PRODUCT, sagaWorkerUpdateSingleProduct);
+  yield takeEvery(REQUEST_DELETE_PRODUCT, sagaWorkerDeleteProduct);
 }

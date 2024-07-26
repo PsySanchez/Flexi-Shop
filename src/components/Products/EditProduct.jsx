@@ -1,21 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import {
-  addProduct,
-  fetchCategories,
-  fetchSelectedProduct,
-} from "../../actions/productAction";
-
+import { updateSingleProduct } from "../../actions/productAction";
+import { deleteProduct } from "../../actions/productAction";
+import Loader from "../Loader/Loader";
 import "./Product.css";
 
-export default function AddProduct() {
-  // const navigate = useNavigate();
+export default function EditProduct({ product }) {
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.products.categories);
-  // const selectedProduct = useSelector(
-  //   (state) => state.products.selectedProduct
-  // );
+  const loading = useSelector((state) => state.app.loading);
 
   const [form, setForm] = useState({
     category: "",
@@ -27,16 +19,8 @@ export default function AddProduct() {
   });
 
   useEffect(() => {
-    if (!categories.length) dispatch(fetchCategories());
-  }, [dispatch, categories]);
-
-  // useEffect(() => {
-  //   if (selectedProduct?.alreadyAdded) {
-  //     // reset selectedProduct
-  //     console.log("🚀 ~ useEffect ~ selectedProduct", selectedProduct);
-  //     navigate(`/product/${selectedProduct.id}`);
-  //   }
-  // }, [selectedProduct]);
+    setForm(product);
+  }, [product]);
 
   const changeInputHandler = (event) => {
     const { name, value } = event.target;
@@ -55,32 +39,19 @@ export default function AddProduct() {
 
   const submitHandler = (event) => {
     event.preventDefault();
+    dispatch(updateSingleProduct(form));
+  };
 
-    dispatch(addProduct(form));
+  const deleteHandler = () => {
+    console.log("delete");
+    dispatch(deleteProduct(form.id));
   };
 
   return (
-    <div>
-      <h2>AddProduct</h2>
-      <form onSubmit={submitHandler} className="form">
-        <div className="col-md-10">
-          <label htmlFor="category" className="form-label">
-            Category
-          </label>
-          <select
-            className="form-select "
-            id="category"
-            name="category"
-            onChange={changeInputHandler}
-          >
-            <option value="">Choose category</option>
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
-        </div>
+    <div className="product-wraper">
+      <form className="form" disabled={loading}>
+        <h4>Edit product</h4>
+
         <div className="col-md-10">
           <label htmlFor="title" className="form-label">
             Title
@@ -89,9 +60,8 @@ export default function AddProduct() {
             type="text"
             className="form-control"
             id="title"
-            value={form.title}
             name="title"
-            placeholder="Enter title"
+            value={product.title}
             onChange={changeInputHandler}
           />
         </div>
@@ -100,12 +70,10 @@ export default function AddProduct() {
             Description
           </label>
           <textarea
-            type="text"
             className="form-control textarea"
             id="description"
-            value={form.description}
             name="description"
-            placeholder="Enter description"
+            value={product.description}
             onChange={changeInputHandler}
           />
         </div>
@@ -115,12 +83,10 @@ export default function AddProduct() {
           </label>
           <input
             type="number"
-            min={0}
             className="form-control"
             id="price"
-            value={form.price}
             name="price"
-            placeholder="Enter price in $"
+            value={product.price}
             onChange={changeInputHandler}
           />
         </div>
@@ -129,23 +95,33 @@ export default function AddProduct() {
             Image
           </label>
           <input
-            type="file"
+            type="text"
             className="form-control"
-            accept="image/png, image/jpeg"
             id="image"
-            value={form.image}
             name="image"
-            placeholder="Enter image"
+            value={product.image}
             onChange={changeInputHandler}
           />
         </div>
-        <button
-          type="submit"
-          className="btn btn-primary"
-          disabled={form.hasError}
-        >
-          Add Product
-        </button>
+        <div className="buttons-wrapper">
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={deleteHandler}
+            disabled={loading}
+          >
+            Delete
+          </button>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={submitHandler}
+            disabled={loading}
+          >
+            Save
+          </button>
+          {loading && <Loader />}
+        </div>
       </form>
     </div>
   );

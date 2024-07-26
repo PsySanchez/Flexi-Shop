@@ -1,12 +1,12 @@
 import {
   ADD_PRODUCT,
-  UPDATE_PRODUCTS,
-  DELETE_PRODUCT,
+  REQUEST_DELETE_PRODUCT,
   ADD_CATEGORY,
   REQUEST_PRODUCTS,
   REQUEST_CATEGORIES,
   REQUEST_SELECTED_PRODUCT,
   REMOVE_SELECTED_PRODUCT,
+  REQUEST_UPDATE_SINGLE_PRODUCT,
 } from "../types/reduxTypes";
 
 export function addProduct(product) {
@@ -25,15 +25,8 @@ export function addCategory(category) {
 
 export function deleteProduct(id) {
   return {
-    type: DELETE_PRODUCT,
+    type: REQUEST_DELETE_PRODUCT,
     payload: id,
-  };
-}
-
-export function updateProducts(products) {
-  return {
-    type: UPDATE_PRODUCTS,
-    payload: products,
   };
 }
 
@@ -59,5 +52,12 @@ export function removeSelectedProduct() {
 export function fetchCategories() {
   return {
     type: REQUEST_CATEGORIES,
+  };
+}
+
+export function updateSingleProduct(product) {
+  return {
+    type: REQUEST_UPDATE_SINGLE_PRODUCT,
+    payload: product,
   };
 }

@@ -6,6 +6,7 @@ import {
   FETCH_CATEGORIES,
   FETCH_SELECTED_PRODUCT,
   REMOVE_SELECTED_PRODUCT,
+  UPDATE_SINGLE_PRODUCT,
 } from "../types/reduxTypes";
 
 const initialState = {
@@ -52,6 +53,13 @@ export const productsReducer = (state = initialState, action) => {
       return {
         ...state,
         categories: action.payload,
+      };
+    case UPDATE_SINGLE_PRODUCT:
+      return {
+        ...state,
+        products: state.products.map((product) =>
+          product.id === action.payload.id ? action.payload : product
+        ),
       };
     default:
       return state;

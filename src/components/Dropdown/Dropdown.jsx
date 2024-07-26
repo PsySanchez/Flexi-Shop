@@ -30,13 +30,13 @@ export default function Dropdown() {
 
       <ul className="dropdown-menu">
         <li>
-          <NavLink to="/addCategory" className="dropdown-item">
-            Add Category
+          <NavLink to="/addProduct" className="dropdown-item">
+            Add Product
           </NavLink>
         </li>
         <li>
-          <NavLink to="/addProduct" className="dropdown-item">
-            Add Product
+          <NavLink to="/addCategory" className="dropdown-item">
+            Add Category
           </NavLink>
         </li>
         <li>

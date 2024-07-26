@@ -3,6 +3,7 @@ import {
   FETCH_PRODUCTS,
   FETCH_CATEGORIES,
   FETCH_SELECTED_PRODUCT,
+  UPDATE_SINGLE_PRODUCT,
 } from "../types/reduxTypes";
 import { hideLoader, showAlert, showLoader } from "../actions/appAction";
 
@@ -58,6 +59,8 @@ export function* sagaWorkerAddProduct(action) {
   try {
     yield put(showLoader());
     const payload = yield call(addProduct, action.payload);
+    payload["alreadyAdded"] = true;
+    console.log("🚀 ~ function*sagaWorkerAddProduct ~ payload:", payload);
     yield put({ type: FETCH_SELECTED_PRODUCT, payload });
     yield put(hideLoader());
   } catch (e) {
@@ -75,4 +78,46 @@ async function addProduct(product) {
     body: JSON.stringify(product),
   });
   return await res.json();
+}
+
+export function* sagaWorkerUpdateSingleProduct(action) {
+  try {
+    yield put(showLoader());
+    const payload = yield call(updateSingleProduct, action.payload);
+    yield put({ type: UPDATE_SINGLE_PRODUCT, payload });
+    yield put(hideLoader());
+    yield put(showAlert("Product updated successfully"));
+  } catch (e) {
+    yield put(showAlert("Something went wrong"));
+    yield put(hideLoader());
+  }
+}
+
+async function updateSingleProduct(product) {
+  const res = await fetch(`https://fakestoreapi.com/products/${product.id}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "PUT",
+    body: JSON.stringify(product),
+  });
+  return await res.json();
+}
+
+export function* sagaWorkerDeleteProduct(action) {
+  try {
+    yield put(showLoader());
+    yield call(deleteProduct, action.payload);
+    yield put(hideLoader());
+    yield put(showAlert("Product deleted successfully"));
+  } catch (e) {
+    yield put(showAlert("Something went wrong"));
+    yield put(hideLoader());
+  }
+}
+
+async function deleteProduct(id) {
+  await fetch(`https://fakestoreapi.com/products/${id}`, {
+    method: "DELETE",
+  });
 }
