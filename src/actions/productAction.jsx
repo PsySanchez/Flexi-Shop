@@ -7,11 +7,12 @@ import {
   REQUEST_SELECTED_PRODUCT,
   REMOVE_SELECTED_PRODUCT,
   REQUEST_UPDATE_SINGLE_PRODUCT,
+  REQUEST_ADD_PRODUCT,
 } from "../types/reduxTypes";
 
 export function addProduct(product) {
   return {
-    type: ADD_PRODUCT,
+    type: REQUEST_ADD_PRODUCT,
     payload: product,
   };
 }

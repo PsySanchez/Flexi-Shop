@@ -4,6 +4,7 @@ import {
   FETCH_CATEGORIES,
   FETCH_SELECTED_PRODUCT,
   UPDATE_SINGLE_PRODUCT,
+  ADD_PRODUCT,
 } from "../types/reduxTypes";
 import { hideLoader, showAlert, showLoader } from "../actions/appAction";
 
@@ -62,6 +63,7 @@ export function* sagaWorkerAddProduct(action) {
     payload["alreadyAdded"] = true;
     console.log("🚀 ~ function*sagaWorkerAddProduct ~ payload:", payload);
     yield put({ type: FETCH_SELECTED_PRODUCT, payload });
+    yield put({ type: ADD_PRODUCT, payload });
     yield put(hideLoader());
   } catch (e) {
     yield put(showAlert("Something went wrong"));

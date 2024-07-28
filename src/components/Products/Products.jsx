@@ -16,18 +16,20 @@ export default function Products() {
   const { loading } = useSelector((state) => state.app);
 
   useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
+  useEffect(() => {
     setFilteredProducts(products);
-    if (products.length === 0) {
-      dispatch(fetchProducts());
-    }
-  }, [dispatch, products.length]);
+  }, [dispatch, products]);
 
   useEffect(() => {
     if (!categories.length) dispatch(fetchCategories());
   }, [dispatch, categories]);
 
   const changeInputHandler = (event) => {
-    const { name, value } = event.target;
+    const { value } = event.target;
+
     if (value) {
       setFilteredProducts(
         products.filter((product) => product.category === value)
@@ -54,7 +56,7 @@ export default function Products() {
             onChange={changeInputHandler}
           >
             <option value="" key={"chooseCategory"}>
-              Choose category
+              All
             </option>
             {categories.map((category) => (
               <option key={category} value={category}>

@@ -43,7 +43,6 @@ export default function EditProduct({ product }) {
   };
 
   const deleteHandler = () => {
-    console.log("delete");
     dispatch(deleteProduct(form.id));
   };
 

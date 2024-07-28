@@ -4,18 +4,18 @@ import { useNavigate } from "react-router-dom";
 import {
   addProduct,
   fetchCategories,
-  fetchSelectedProduct,
+  removeSelectedProduct,
 } from "../../actions/productAction";
 
 import "./Product.css";
 
 export default function AddProduct() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.products.categories);
-  // const selectedProduct = useSelector(
-  //   (state) => state.products.selectedProduct
-  // );
+  const selectedProduct = useSelector(
+    (state) => state.products.selectedProduct
+  );
 
   const [form, setForm] = useState({
     category: "",
@@ -30,13 +30,13 @@ export default function AddProduct() {
     if (!categories.length) dispatch(fetchCategories());
   }, [dispatch, categories]);
 
-  // useEffect(() => {
-  //   if (selectedProduct?.alreadyAdded) {
-  //     // reset selectedProduct
-  //     console.log("🚀 ~ useEffect ~ selectedProduct", selectedProduct);
-  //     navigate(`/product/${selectedProduct.id}`);
-  //   }
-  // }, [selectedProduct]);
+  useEffect(() => {
+    if (selectedProduct?.alreadyAdded) {
+      // reset selectedProduct
+      dispatch(removeSelectedProduct());
+      navigate(`/product/${selectedProduct.id}`);
+    }
+  }, [selectedProduct?.alreadyAdded]);
 
   const changeInputHandler = (event) => {
     const { name, value } = event.target;
