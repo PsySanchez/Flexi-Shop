@@ -3,12 +3,12 @@ import {
   REGISTER,
   LOGOUT,
   SET_USER,
-  IS_LOADING,
+  INITIALIZING,
 } from "../types/reduxTypes";
 
 const initialState = {
   user: null,
-  isLoading: true,
+  isInit: false,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -29,10 +29,10 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         user: action.payload,
       };
-    case IS_LOADING:
+    case INITIALIZING:
       return {
         ...state,
-        isLoading: action.payload,
+        isInit: action.payload,
       };
 
     default:

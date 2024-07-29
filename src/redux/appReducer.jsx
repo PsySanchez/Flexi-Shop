@@ -13,6 +13,14 @@ const initialState = {
     text: null,
     type: null,
   },
+  modal: {
+    title: null,
+    text: null,
+    btnSuccess: null,
+    btnCancel: null,
+    width: "400px",
+    successCliced: false,
+  },
 };
 
 export const appReducer = (state = initialState, action) => {

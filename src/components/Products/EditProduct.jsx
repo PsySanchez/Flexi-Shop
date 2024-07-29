@@ -4,6 +4,7 @@ import { updateSingleProduct } from "../../actions/productAction";
 import { deleteProduct } from "../../actions/productAction";
 import Loader from "../Loader/Loader";
 import "./Product.css";
+import { showModal } from "../../actions/appAction";
 
 export default function EditProduct({ product }) {
   const dispatch = useDispatch();
@@ -43,7 +44,16 @@ export default function EditProduct({ product }) {
   };
 
   const deleteHandler = () => {
-    dispatch(deleteProduct(form.id));
+    dispatch(
+      showModal({
+        title: "Delete product",
+        text: "Are you sure you want to delete this product?",
+        btnSuccess: "Delete",
+        btnCancel: "Cancel",
+        width: "400px",
+      })
+    );
+    // dispatch(deleteProduct(form.id));
   };
 
   return (

@@ -1,9 +1,13 @@
-import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "../../actions/appAction";
+import { useEffect } from "react";
+import { logout } from "../../actions/authAction";
 
 export default function Dropdown() {
   const dispatch = useDispatch();
+  const modal = useSelector((state) => state.app.modal);
+  const navigate = useNavigate();
 
   const logoutHandler = () => {
     dispatch(
@@ -12,9 +16,18 @@ export default function Dropdown() {
         text: "Are you sure you want to logout?",
         btnSuccess: "Logout",
         btnCancel: "Cancel",
+        width: "300px",
       })
     );
   };
+
+  useEffect(() => {
+    if (modal.successCliced) {
+      dispatch(logout());
+      dispatch(showModal({}));
+      navigate("/");
+    }
+  }, [modal.successCliced]);
 
   return (
     <div className="dropdown">

@@ -3,7 +3,7 @@ import {
   SET_USER,
   LOGOUT,
   REGISTER,
-  IS_LOADING,
+  INITIALIZING,
   REQUEST_LOGIN,
 } from "../types/reduxTypes";
 
@@ -45,13 +45,13 @@ export function checkAuth() {
     if (token) {
       dispatch(setUser(token));
     }
-    dispatch(isLoading(false));
+    dispatch(init(true));
   };
 }
 
-export function isLoading(loading) {
+export function init(isInit) {
   return {
-    type: IS_LOADING,
-    payload: loading,
+    type: INITIALIZING,
+    payload: isInit,
   };
 }

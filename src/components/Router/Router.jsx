@@ -12,14 +12,14 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Router() {
-  const isLoading = useSelector((state) => state.auth.isLoading);
+  const isInit = useSelector((state) => state.auth.isInit);
   const dispatch = useDispatch();
   useEffect(() => {
     // check if user is logged in
     dispatch(checkAuth());
   }, [dispatch]);
 
-  if (isLoading) {
+  if (!isInit) {
     return <div>Loading...</div>;
   }
 

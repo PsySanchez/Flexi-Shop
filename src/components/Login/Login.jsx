@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../actions/authAction";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { showLoader } from "../../actions/appAction";
+import Loader from "../Loader/Loader";
 
 export default function Login() {
-  // const user = useSelector((state) => state.auth.user);
   const loading = useSelector((state) => state.app.loading);
   // username: "mor_2314",
   // password: "83r5^_",
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     userName: "",
@@ -19,17 +16,10 @@ export default function Login() {
     hasError: true,
   });
 
-  // useEffect(() => {
-  //   if (user) {
-  //     navigate("/");
-  //   }
-  // }, [user]);
-
   const submitHandler = (event) => {
     event.preventDefault();
 
     const { userName, password } = form;
-    dispatch(showLoader());
     dispatch(login(userName, password));
   };
 
@@ -80,6 +70,7 @@ export default function Login() {
       >
         Login
       </button>
+      {loading && <Loader />}
     </form>
   );
 }
