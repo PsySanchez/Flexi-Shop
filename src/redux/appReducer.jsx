@@ -20,6 +20,7 @@ const initialState = {
     btnCancel: null,
     width: "400px",
     successCliced: false,
+    type: null,
   },
 };
 

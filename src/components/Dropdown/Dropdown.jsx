@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "../../actions/appAction";
 import { useEffect } from "react";
 import { logout } from "../../actions/authAction";
+import { LOGOUT } from "../../types/modalTypes";
 
 export default function Dropdown() {
   const dispatch = useDispatch();
@@ -17,12 +18,13 @@ export default function Dropdown() {
         btnSuccess: "Logout",
         btnCancel: "Cancel",
         width: "300px",
+        type: LOGOUT,
       })
     );
   };
 
   useEffect(() => {
-    if (modal.successCliced) {
+    if (modal.successCliced && modal.type === LOGOUT) {
       dispatch(logout());
       dispatch(showModal({}));
       navigate("/");

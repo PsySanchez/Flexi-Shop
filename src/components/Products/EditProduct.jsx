@@ -5,10 +5,12 @@ import { deleteProduct } from "../../actions/productAction";
 import Loader from "../Loader/Loader";
 import "./Product.css";
 import { showModal } from "../../actions/appAction";
+import { DELETE_PRODUCT } from "../../types/modalTypes";
 
 export default function EditProduct({ product }) {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.app.loading);
+  const modal = useSelector((state) => state.app.modal);
 
   const [form, setForm] = useState({
     category: "",
@@ -22,6 +24,13 @@ export default function EditProduct({ product }) {
   useEffect(() => {
     setForm(product);
   }, [product]);
+
+  useEffect(() => {
+    if (modal.successCliced && modal.type === DELETE_PRODUCT) {
+      dispatch(deleteProduct(product.id));
+      dispatch(showModal({}));
+    }
+  }, [modal.successCliced]);
 
   const changeInputHandler = (event) => {
     const { name, value } = event.target;
@@ -51,6 +60,7 @@ export default function EditProduct({ product }) {
         btnSuccess: "Delete",
         btnCancel: "Cancel",
         width: "400px",
+        type: DELETE_PRODUCT,
       })
     );
     // dispatch(deleteProduct(form.id));

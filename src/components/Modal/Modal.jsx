@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 export default function Modal() {
   const dispatch = useDispatch();
 
-  const { title, text, btnSuccess, btnCancel, width } = useSelector(
+  const { title, text, btnSuccess, btnCancel, width, type } = useSelector(
     (state) => state.app.modal
   );
 
@@ -13,6 +13,7 @@ export default function Modal() {
     dispatch(
       showModal({
         successCliced: true,
+        type,
       })
     );
   };
