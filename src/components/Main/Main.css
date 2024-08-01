@@ -5,13 +5,12 @@ main {
 }
 
 .router {
-  position: fixed;
   left: 150px;
   display: flex;
   justify-content: center;
 
   overflow-y: auto;
   height: calc(100vh - 70px);
-  width: calc(100% - 150px);
+  width: 100vw;
   padding: 1rem;
 }

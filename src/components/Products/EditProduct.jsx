@@ -6,11 +6,13 @@ import Loader from "../Loader/Loader";
 import "./Product.css";
 import { showModal } from "../../actions/appAction";
 import { DELETE_PRODUCT } from "../../types/modalTypes";
+import { useNavigate } from "react-router-dom";
 
 export default function EditProduct({ product }) {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.app.loading);
   const modal = useSelector((state) => state.app.modal);
+  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     category: "",
@@ -29,6 +31,7 @@ export default function EditProduct({ product }) {
     if (modal.successCliced && modal.type === DELETE_PRODUCT) {
       dispatch(deleteProduct(product.id));
       dispatch(showModal({}));
+      navigate("/products");
     }
   }, [modal.successCliced]);
 
