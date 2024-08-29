@@ -21,20 +21,21 @@ export default function Register() {
 
   const changeInputHandler = (event) => {
     const { name, value } = event.target;
-    switch (name) {
-      case "userName":
-        setForm((prev) => ({ ...prev, userName: value }));
-        break;
-      case "password":
-        setForm((prev) => ({ ...prev, password: value }));
-        break;
-      default:
-        break;
-    }
 
+    if (name === "checkbox") {
+      setForm((prev) => ({ ...prev, [name]: !prev.checkbox }));
+    } else {
+      setForm((prev) => ({ ...prev, [name]: value }));
+    }
+    
     setForm((prev) => ({
       ...prev,
-      hasError: !prev.userName.trim() || !prev.password.trim(),
+      hasError: !(
+        prev.userName.length > 3 &&
+        prev.password.length > 3 &&
+        prev.email.includes("@") &&
+        prev.checkbox === true
+      ),
     }));
   };
 
@@ -85,7 +86,7 @@ export default function Register() {
       <div className="col-md-10 checkbox-wrapper">
         <input
           className="form-check-input mt-0"
-          id="email"
+          id="checkbox"
           type="checkbox"
           value={form.checkbox}
           name="checkbox"

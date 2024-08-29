@@ -9,10 +9,13 @@ export default function Sidebar() {
     padding: "20px",
     zIndex: "1000",
     marginTop: "16px",
+    left: "0px",
+    borderRadius: " 0.375rem",
+
     button: {
       position: "absolute",
       top: "0",
-      right: "-42px",
+      right: "0",
     },
   });
 
@@ -20,6 +23,10 @@ export default function Sidebar() {
     setStyle((prev) => ({
       ...prev,
       left: prev.left === "0px" ? "-150px" : "0px",
+      button: {
+        ...prev.button,
+        right: prev.left === "0px" ? "-40px" : "0px",
+      },
     }));
   };
 

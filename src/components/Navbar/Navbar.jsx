@@ -76,6 +76,19 @@ export default function Navbar() {
                 <Dropdown />
               </li>
             )}
+            {user && (
+              <li className="nav-item">
+                <NavLink
+                  to="/cart"
+                  className="nav-link"
+                  style={({ isActive }) => ({
+                    color: isActive ? "#0d6efd" : "black",
+                  })}
+                >
+                  Cart
+                </NavLink>
+              </li>
+            )}
           </ul>
           <Search />
         </div>

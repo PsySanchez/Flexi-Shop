@@ -5,6 +5,7 @@ import { Products, AddCategory, AddProduct, Product } from "../Products";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Profile from "../Profile/Profile";
+import Cart from "../Cart/Cart";
 import ProtectedRoute from "./ProtectedRoute";
 import AuthRoute from "./AuthRoute";
 import { checkAuth } from "../../actions/authAction";
@@ -67,6 +68,14 @@ export default function Router() {
         element={
           <ProtectedRoute>
             <AddCategory />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/cart"
+        element={
+          <ProtectedRoute>
+            <Cart />
           </ProtectedRoute>
         }
       />

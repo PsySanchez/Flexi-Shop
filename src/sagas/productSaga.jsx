@@ -12,8 +12,8 @@ export function* sagaWorkerFetchProducts() {
   try {
     yield put(showLoader());
     const payload = yield call(fetchProducts);
-    yield put({ type: FETCH_PRODUCTS, payload });
     yield put(hideLoader());
+    yield put({ type: FETCH_PRODUCTS, payload });
   } catch (e) {
     yield put(showAlert("Something went wrong"));
     yield put(hideLoader());

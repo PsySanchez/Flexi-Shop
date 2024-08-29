@@ -4,6 +4,7 @@ import "./Product.css";
 import { useEffect, useState, useRef } from "react";
 import { fetchSelectedProduct } from "../../actions/productAction";
 import EditProduct from "./EditProduct";
+import { addToCart } from "../../actions/cartAction";
 
 export default function Product() {
   const [editProduct, setEditProduct] = useState(false);
@@ -33,6 +34,11 @@ export default function Product() {
     setHasError(true);
   };
 
+  const addProductToCart = () => {
+    console.log("Add to cart product: ", product.id);
+    dispatch(addToCart(product));
+  };
+
   if (!product?.title) return <p>Product not found</p>;
 
   return (
@@ -58,6 +64,14 @@ export default function Product() {
               Edit
             </button>
           )}
+
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => addProductToCart()}
+          >
+            Add to Cart
+          </button>
         </div>
       )}
       {editProduct && <EditProduct product={product} />}
