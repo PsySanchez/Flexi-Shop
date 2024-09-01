@@ -35,7 +35,6 @@ export default function Product() {
   };
 
   const addProductToCart = () => {
-    console.log("Add to cart product: ", product.id);
     dispatch(addToCart(product));
   };
 
@@ -55,23 +54,25 @@ export default function Product() {
           />
           <p className="text">{product.description}</p>
           <p>Price: {product.price}$</p>
-          {user && (
+          <div className="product-buttons">
+            {user && (
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => setEditProduct(true)}
+              >
+                Edit
+              </button>
+            )}
+
             <button
               type="button"
-              className="btn btn-primary"
-              onClick={() => setEditProduct(true)}
+              className="btn btn-success"
+              onClick={() => addProductToCart()}
             >
-              Edit
+              Add to Cart
             </button>
-          )}
-
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => addProductToCart()}
-          >
-            Add to Cart
-          </button>
+          </div>
         </div>
       )}
       {editProduct && <EditProduct product={product} />}

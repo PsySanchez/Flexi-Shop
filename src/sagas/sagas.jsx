@@ -7,6 +7,7 @@ import {
   REQUEST_ADD_PRODUCT,
   REQUEST_UPDATE_SINGLE_PRODUCT,
   REQUEST_DELETE_PRODUCT,
+  REQUEST_ADD_PRODUCT_TO_CART,
 } from "../types/reduxTypes";
 
 import {
@@ -20,6 +21,8 @@ import {
 
 import { sagaWorkerLogin } from "./authSaga";
 
+import { sagaWorkerAddToCart } from "./cartSaga";
+
 export function* sagaWatcher() {
   yield takeEvery(REQUEST_PRODUCTS, sagaWorkerFetchProducts);
   yield takeEvery(REQUEST_SELECTED_PRODUCT, sagaWorkerFetchSelectedProduct);
@@ -28,4 +31,5 @@ export function* sagaWatcher() {
   yield takeEvery(REQUEST_LOGIN, sagaWorkerLogin);
   yield takeEvery(REQUEST_UPDATE_SINGLE_PRODUCT, sagaWorkerUpdateSingleProduct);
   yield takeEvery(REQUEST_DELETE_PRODUCT, sagaWorkerDeleteProduct);
+  yield takeEvery(REQUEST_ADD_PRODUCT_TO_CART, sagaWorkerAddToCart);
 }

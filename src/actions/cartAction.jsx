@@ -1,8 +1,8 @@
-import { REMOVE_FROM_CART, ADD_TO_CART } from "../types/reduxTypes";
+import { REMOVE_FROM_CART, REQUEST_ADD_PRODUCT_TO_CART } from "../types/reduxTypes";
 
 export function addToCart(product) {
   return {
-    type: ADD_TO_CART,
+    type: REQUEST_ADD_PRODUCT_TO_CART,
     payload: product,
   };
 }

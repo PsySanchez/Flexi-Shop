@@ -61,7 +61,6 @@ export function* sagaWorkerAddProduct(action) {
     yield put(showLoader());
     const payload = yield call(addProduct, action.payload);
     payload["alreadyAdded"] = true;
-    console.log("🚀 ~ function*sagaWorkerAddProduct ~ payload:", payload);
     yield put({ type: FETCH_SELECTED_PRODUCT, payload });
     yield put({ type: ADD_PRODUCT, payload });
     yield put(hideLoader());
