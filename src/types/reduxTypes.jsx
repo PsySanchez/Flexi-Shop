@@ -39,3 +39,4 @@ export const UPDATE_CART = "CART/UPDATE_CART";
 export const CLEAR_CART = "CART/CLEAR_CART";
 export const CHECKOUT = "CART/CHECKOUT";
 export const FETCH_CART = "CART/FETCH_CART";
+export const REQUEST_CART = "CART/REQUEST_CART";

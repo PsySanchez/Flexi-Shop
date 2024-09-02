@@ -1,4 +1,14 @@
-import { REMOVE_FROM_CART, REQUEST_ADD_PRODUCT_TO_CART } from "../types/reduxTypes";
+import {
+  REMOVE_FROM_CART,
+  REQUEST_CART,
+  REQUEST_ADD_PRODUCT_TO_CART,
+} from "../types/reduxTypes";
+
+export function fetchCart() {
+  return {
+    type: REQUEST_CART,
+  };
+}
 
 export function addToCart(product) {
   return {

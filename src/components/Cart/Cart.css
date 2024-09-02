@@ -19,3 +19,10 @@
   width: 100px;
   height: 100px;
 }
+
+.quantity-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 1rem;
+}
