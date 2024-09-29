@@ -9,6 +9,8 @@ import {
   REQUEST_DELETE_PRODUCT,
   REQUEST_ADD_PRODUCT_TO_CART,
   REQUEST_CART,
+  REQUEST_UP_QUANTITY,
+  REQUEST_DOWN_QUANTITY,
 } from "../types/reduxTypes";
 
 import {
@@ -22,7 +24,12 @@ import {
 
 import { sagaWorkerLogin } from "./authSaga";
 
-import { sagaWorkerFetchCart, sagaWorkerAddToCart } from "./cartSaga";
+import {
+  sagaWorkerFetchCart,
+  sagaWorkerAddToCart,
+  sagaWorkerUpQuantity,
+  sagaWorkerDownQuantity,
+} from "./cartSaga";
 
 export function* sagaWatcher() {
   yield takeEvery(REQUEST_PRODUCTS, sagaWorkerFetchProducts);
@@ -34,4 +41,6 @@ export function* sagaWatcher() {
   yield takeEvery(REQUEST_DELETE_PRODUCT, sagaWorkerDeleteProduct);
   yield takeEvery(REQUEST_CART, sagaWorkerFetchCart);
   yield takeEvery(REQUEST_ADD_PRODUCT_TO_CART, sagaWorkerAddToCart);
+  yield takeEvery(REQUEST_UP_QUANTITY, sagaWorkerUpQuantity);
+  yield takeEvery(REQUEST_DOWN_QUANTITY, sagaWorkerDownQuantity);
 }

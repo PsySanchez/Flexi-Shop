@@ -1,10 +1,16 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart, fetchCart, addToCart } from "../../actions/cartAction";
+import {
+  removeFromCart,
+  fetchCart,
+  downQuantity,
+  upQuantity,
+} from "../../actions/cartAction";
 import "./Cart.css";
 
 export default function Cart() {
   const cart = useSelector((state) => state.cart);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -15,15 +21,12 @@ export default function Cart() {
     dispatch(removeFromCart(id));
   };
 
-  const upQuantity = (id) => {
-    const product = cart.find((product) => product.id === id);
-    dispatch(addToCart(product));
+  const up = (id) => {
+    dispatch(upQuantity(id));
   };
 
-  const downQuantity = (id) => {
-    console.log("up", id);
-
-    // dispatch(downQuantity(id));
+  const down = (id) => {
+    dispatch(downQuantity(id));
   };
 
   return (
@@ -41,9 +44,9 @@ export default function Cart() {
             <h4>{product.title}</h4>
             <h6>Quantity</h6>
             <div className="quantity-wrapper">
-              <button onClick={() => upQuantity(product.id)}>+</button>
+              <button onClick={() => up(product.id)}>+</button>
               <p>{product.quantity}</p>
-              <button onClick={() => downQuantity(product.id)}>-</button>
+              <button onClick={() => down(product.id)}>-</button>
             </div>
             <p>Price: {product.price}$</p>
             <button
